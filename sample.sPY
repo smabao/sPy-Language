@@ -1,4 +1,9 @@
-int x = 3 + 4 ~
-imprimir(x) ~
-introducir x~
-imprimir "HELLO WORLD"~
+comienzo{
+a = 5*(3+1)~
+imprimir(a)~
+imprimir("Hello World")~
+~*si(1<2)
+imprimir("YES")~
+otro
+imprimir("NO")~*~
+}fin

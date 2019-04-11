@@ -1,1 +1,2835 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    OPENBRACE
+    is
+    DBLLIT
+    CHRLIT
+    UNDERSCORE
+    try
+    for
+    call
+    COMMA
+    CLOSEBRACE
+    do
+    MULTI_COMMENT
+    break
+    FLTLIT
+    SINGLE_COMMENT
+    while
+    BOOLEAN
+    NOT
+    QUOTATION
+
+Grammar
+
+Rule 0     S' -> main_program
+Rule 1     main_program -> start OPENCURLY statement CLOSECURLY end
+Rule 2     statement -> empty
+Rule 3     empty -> <empty>
+Rule 4     statement -> statement statement statement
+Rule 5     statement -> VAR ASSIGN expression TILDE
+Rule 6     statement -> expression TILDE
+Rule 7     statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def
+Rule 8     parameter -> int VAR
+Rule 9     parameter -> string VAR
+Rule 10    statement -> class VAR OPENCURLY statement CLOSECURLY
+Rule 11    statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+Rule 12    statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+Rule 13    statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+Rule 14    statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+Rule 15    statement -> print OPENPAR expression CLOSEPAR TILDE
+Rule 16    statement -> print OPENPAR STRLIT CLOSEPAR TILDE
+Rule 17    statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+Rule 18    statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+Rule 19    statement -> if_statement
+Rule 20    if_statement -> if OPENPAR boolean CLOSEPAR statement
+Rule 21    if_statement -> if OPENPAR boolean CLOSEPAR statement else statement
+Rule 22    expression -> term
+Rule 23    expression -> boolean
+Rule 24    expression -> expression PLUS term
+Rule 25    expression -> expression MINUS term
+Rule 26    boolean -> expression GT term
+Rule 27    boolean -> expression GEQ term
+Rule 28    boolean -> expression LT term
+Rule 29    boolean -> expression LEQ term
+Rule 30    boolean -> expression EQ term
+Rule 31    boolean -> expression NEQ term
+Rule 32    boolean -> expression AND term
+Rule 33    boolean -> expression OR term
+Rule 34    term -> term MUL factor
+Rule 35    term -> term DIV factor
+Rule 36    term -> term MOD factor
+Rule 37    term -> STRLIT
+Rule 38    term -> factor
+Rule 39    factor -> INTLIT
+Rule 40    factor -> OPENPAR expression CLOSEPAR
+
+Terminals, with rules where they appear
+
+AND                  : 32
+ASSIGN               : 5 11 12 13 14 17 18
+BOOLEAN              : 
+CHRLIT               : 
+CLOSEBRACE           : 
+CLOSECURLY           : 1 10
+CLOSEPAR             : 7 11 12 13 14 15 16 17 18 20 21 40
+COMMA                : 
+DBLLIT               : 
+DIV                  : 35
+EQ                   : 30
+FLTLIT               : 
+GEQ                  : 27
+GT                   : 26
+INTLIT               : 39
+LEQ                  : 29
+LT                   : 28
+MINUS                : 25
+MOD                  : 36
+MUL                  : 34
+MULTI_COMMENT        : 
+NEQ                  : 31
+NOT                  : 
+OPENBRACE            : 
+OPENCURLY            : 1 10
+OPENPAR              : 7 11 12 13 14 15 16 17 18 20 21 40
+OR                   : 33
+PLUS                 : 24
+QUOTATION            : 
+SINGLE_COMMENT       : 
+STRLIT               : 12 14 16 18 37
+TILDE                : 5 6 11 11 12 12 13 13 14 14 15 16 17 17 18 18
+UNDERSCORE           : 
+VAR                  : 5 7 8 9 10 11 11 12 12 13 13 14 14 17 17 18 18
+break                : 
+call                 : 
+class                : 10
+def                  : 7
+do                   : 
+else                 : 21
+end                  : 1
+end_def              : 7
+error                : 
+for                  : 
+if                   : 20 21
+int                  : 8
+is                   : 
+print                : 15 16 17 18
+return               : 13 14
+scan                 : 11 12
+start                : 1
+string               : 9
+try                  : 
+while                : 
+
+Nonterminals, with rules where they appear
+
+boolean              : 20 21 23
+empty                : 2
+expression           : 5 6 11 13 15 17 24 25 26 27 28 29 30 31 32 33 40
+factor               : 34 35 36 38
+if_statement         : 19
+main_program         : 0
+parameter            : 7
+statement            : 1 4 4 4 7 10 20 21 21
+term                 : 22 24 25 26 27 28 29 30 31 32 33 34 35 36
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . main_program
+    (1) main_program -> . start OPENCURLY statement CLOSECURLY end
+
+    start           shift and go to state 1
+
+    main_program                   shift and go to state 2
+
+state 1
+
+    (1) main_program -> start . OPENCURLY statement CLOSECURLY end
+
+    OPENCURLY       shift and go to state 3
+
+
+state 2
+
+    (0) S' -> main_program .
+
+
+
+state 3
+
+    (1) main_program -> start OPENCURLY . statement CLOSECURLY end
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 8
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 4
+
+    (40) factor -> OPENPAR . expression CLOSEPAR
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 5
+    expression                     shift and go to state 19
+    factor                         shift and go to state 12
+
+state 5
+
+    (23) expression -> boolean .
+
+    TILDE           reduce using rule 23 (expression -> boolean .)
+    PLUS            reduce using rule 23 (expression -> boolean .)
+    MINUS           reduce using rule 23 (expression -> boolean .)
+    GT              reduce using rule 23 (expression -> boolean .)
+    GEQ             reduce using rule 23 (expression -> boolean .)
+    LT              reduce using rule 23 (expression -> boolean .)
+    LEQ             reduce using rule 23 (expression -> boolean .)
+    EQ              reduce using rule 23 (expression -> boolean .)
+    NEQ             reduce using rule 23 (expression -> boolean .)
+    AND             reduce using rule 23 (expression -> boolean .)
+    OR              reduce using rule 23 (expression -> boolean .)
+    CLOSEPAR        reduce using rule 23 (expression -> boolean .)
+
+
+state 6
+
+    (39) factor -> INTLIT .
+
+    MUL             reduce using rule 39 (factor -> INTLIT .)
+    DIV             reduce using rule 39 (factor -> INTLIT .)
+    MOD             reduce using rule 39 (factor -> INTLIT .)
+    TILDE           reduce using rule 39 (factor -> INTLIT .)
+    PLUS            reduce using rule 39 (factor -> INTLIT .)
+    MINUS           reduce using rule 39 (factor -> INTLIT .)
+    GT              reduce using rule 39 (factor -> INTLIT .)
+    GEQ             reduce using rule 39 (factor -> INTLIT .)
+    LT              reduce using rule 39 (factor -> INTLIT .)
+    LEQ             reduce using rule 39 (factor -> INTLIT .)
+    EQ              reduce using rule 39 (factor -> INTLIT .)
+    NEQ             reduce using rule 39 (factor -> INTLIT .)
+    AND             reduce using rule 39 (factor -> INTLIT .)
+    OR              reduce using rule 39 (factor -> INTLIT .)
+    CLOSEPAR        reduce using rule 39 (factor -> INTLIT .)
+
+
+state 7
+
+    (20) if_statement -> if . OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> if . OPENPAR boolean CLOSEPAR statement else statement
+
+    OPENPAR         shift and go to state 20
+
+
+state 8
+
+    (1) main_program -> start OPENCURLY statement . CLOSECURLY end
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for CLOSECURLY resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    CLOSECURLY      shift and go to state 21
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+  ! CLOSECURLY      [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 22
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 9
+
+    (15) statement -> print . OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> print . OPENPAR STRLIT CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 23
+
+
+state 10
+
+    (19) statement -> if_statement .
+
+    CLOSECURLY      reduce using rule 19 (statement -> if_statement .)
+    VAR             reduce using rule 19 (statement -> if_statement .)
+    def             reduce using rule 19 (statement -> if_statement .)
+    class           reduce using rule 19 (statement -> if_statement .)
+    print           reduce using rule 19 (statement -> if_statement .)
+    if              reduce using rule 19 (statement -> if_statement .)
+    STRLIT          reduce using rule 19 (statement -> if_statement .)
+    INTLIT          reduce using rule 19 (statement -> if_statement .)
+    OPENPAR         reduce using rule 19 (statement -> if_statement .)
+    else            reduce using rule 19 (statement -> if_statement .)
+    end_def         reduce using rule 19 (statement -> if_statement .)
+
+
+state 11
+
+    (2) statement -> empty .
+
+    CLOSECURLY      reduce using rule 2 (statement -> empty .)
+    VAR             reduce using rule 2 (statement -> empty .)
+    def             reduce using rule 2 (statement -> empty .)
+    class           reduce using rule 2 (statement -> empty .)
+    print           reduce using rule 2 (statement -> empty .)
+    if              reduce using rule 2 (statement -> empty .)
+    STRLIT          reduce using rule 2 (statement -> empty .)
+    INTLIT          reduce using rule 2 (statement -> empty .)
+    OPENPAR         reduce using rule 2 (statement -> empty .)
+    else            reduce using rule 2 (statement -> empty .)
+    end_def         reduce using rule 2 (statement -> empty .)
+
+
+state 12
+
+    (38) term -> factor .
+
+    MUL             reduce using rule 38 (term -> factor .)
+    DIV             reduce using rule 38 (term -> factor .)
+    MOD             reduce using rule 38 (term -> factor .)
+    TILDE           reduce using rule 38 (term -> factor .)
+    PLUS            reduce using rule 38 (term -> factor .)
+    MINUS           reduce using rule 38 (term -> factor .)
+    GT              reduce using rule 38 (term -> factor .)
+    GEQ             reduce using rule 38 (term -> factor .)
+    LT              reduce using rule 38 (term -> factor .)
+    LEQ             reduce using rule 38 (term -> factor .)
+    EQ              reduce using rule 38 (term -> factor .)
+    NEQ             reduce using rule 38 (term -> factor .)
+    AND             reduce using rule 38 (term -> factor .)
+    OR              reduce using rule 38 (term -> factor .)
+    CLOSEPAR        reduce using rule 38 (term -> factor .)
+
+
+state 13
+
+    (37) term -> STRLIT .
+
+    MUL             reduce using rule 37 (term -> STRLIT .)
+    DIV             reduce using rule 37 (term -> STRLIT .)
+    MOD             reduce using rule 37 (term -> STRLIT .)
+    TILDE           reduce using rule 37 (term -> STRLIT .)
+    PLUS            reduce using rule 37 (term -> STRLIT .)
+    MINUS           reduce using rule 37 (term -> STRLIT .)
+    GT              reduce using rule 37 (term -> STRLIT .)
+    GEQ             reduce using rule 37 (term -> STRLIT .)
+    LT              reduce using rule 37 (term -> STRLIT .)
+    LEQ             reduce using rule 37 (term -> STRLIT .)
+    EQ              reduce using rule 37 (term -> STRLIT .)
+    NEQ             reduce using rule 37 (term -> STRLIT .)
+    AND             reduce using rule 37 (term -> STRLIT .)
+    OR              reduce using rule 37 (term -> STRLIT .)
+    CLOSEPAR        reduce using rule 37 (term -> STRLIT .)
+
+
+state 14
+
+    (5) statement -> VAR . ASSIGN expression TILDE
+    (11) statement -> VAR . ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> VAR . ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> VAR . ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> VAR . ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (17) statement -> VAR . ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> VAR . ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+
+    ASSIGN          shift and go to state 24
+
+
+state 15
+
+    (10) statement -> class . VAR OPENCURLY statement CLOSECURLY
+
+    VAR             shift and go to state 25
+
+
+state 16
+
+    (22) expression -> term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 22 (expression -> term .)
+    PLUS            reduce using rule 22 (expression -> term .)
+    MINUS           reduce using rule 22 (expression -> term .)
+    GT              reduce using rule 22 (expression -> term .)
+    GEQ             reduce using rule 22 (expression -> term .)
+    LT              reduce using rule 22 (expression -> term .)
+    LEQ             reduce using rule 22 (expression -> term .)
+    EQ              reduce using rule 22 (expression -> term .)
+    NEQ             reduce using rule 22 (expression -> term .)
+    AND             reduce using rule 22 (expression -> term .)
+    OR              reduce using rule 22 (expression -> term .)
+    CLOSEPAR        reduce using rule 22 (expression -> term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 17
+
+    (6) statement -> expression . TILDE
+    (24) expression -> expression . PLUS term
+    (25) expression -> expression . MINUS term
+    (26) boolean -> expression . GT term
+    (27) boolean -> expression . GEQ term
+    (28) boolean -> expression . LT term
+    (29) boolean -> expression . LEQ term
+    (30) boolean -> expression . EQ term
+    (31) boolean -> expression . NEQ term
+    (32) boolean -> expression . AND term
+    (33) boolean -> expression . OR term
+
+    TILDE           shift and go to state 37
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 38
+    GT              shift and go to state 30
+    GEQ             shift and go to state 32
+    LT              shift and go to state 35
+    LEQ             shift and go to state 34
+    EQ              shift and go to state 31
+    NEQ             shift and go to state 39
+    AND             shift and go to state 29
+    OR              shift and go to state 33
+
+
+state 18
+
+    (7) statement -> def . VAR OPENPAR parameter CLOSEPAR statement end_def
+
+    VAR             shift and go to state 40
+
+
+state 19
+
+    (40) factor -> OPENPAR expression . CLOSEPAR
+    (24) expression -> expression . PLUS term
+    (25) expression -> expression . MINUS term
+    (26) boolean -> expression . GT term
+    (27) boolean -> expression . GEQ term
+    (28) boolean -> expression . LT term
+    (29) boolean -> expression . LEQ term
+    (30) boolean -> expression . EQ term
+    (31) boolean -> expression . NEQ term
+    (32) boolean -> expression . AND term
+    (33) boolean -> expression . OR term
+
+    CLOSEPAR        shift and go to state 41
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 38
+    GT              shift and go to state 30
+    GEQ             shift and go to state 32
+    LT              shift and go to state 35
+    LEQ             shift and go to state 34
+    EQ              shift and go to state 31
+    NEQ             shift and go to state 39
+    AND             shift and go to state 29
+    OR              shift and go to state 33
+
+
+state 20
+
+    (20) if_statement -> if OPENPAR . boolean CLOSEPAR statement
+    (21) if_statement -> if OPENPAR . boolean CLOSEPAR statement else statement
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 42
+    expression                     shift and go to state 43
+    factor                         shift and go to state 12
+
+state 21
+
+    (1) main_program -> start OPENCURLY statement CLOSECURLY . end
+
+    end             shift and go to state 44
+
+
+state 22
+
+    (4) statement -> statement statement . statement
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    else            reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 45
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 23
+
+    (15) statement -> print OPENPAR . expression CLOSEPAR TILDE
+    (16) statement -> print OPENPAR . STRLIT CLOSEPAR TILDE
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 46
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 5
+    expression                     shift and go to state 47
+    factor                         shift and go to state 12
+
+state 24
+
+    (5) statement -> VAR ASSIGN . expression TILDE
+    (11) statement -> VAR ASSIGN . expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> VAR ASSIGN . STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> VAR ASSIGN . expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> VAR ASSIGN . STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (17) statement -> VAR ASSIGN . expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> VAR ASSIGN . STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 48
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 5
+    expression                     shift and go to state 49
+    factor                         shift and go to state 12
+
+state 25
+
+    (10) statement -> class VAR . OPENCURLY statement CLOSECURLY
+
+    OPENCURLY       shift and go to state 50
+
+
+state 26
+
+    (34) term -> term MUL . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    factor                         shift and go to state 51
+
+state 27
+
+    (36) term -> term MOD . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    factor                         shift and go to state 52
+
+state 28
+
+    (35) term -> term DIV . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    factor                         shift and go to state 53
+
+state 29
+
+    (32) boolean -> expression AND . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 54
+    factor                         shift and go to state 12
+
+state 30
+
+    (26) boolean -> expression GT . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 55
+    factor                         shift and go to state 12
+
+state 31
+
+    (30) boolean -> expression EQ . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 56
+    factor                         shift and go to state 12
+
+state 32
+
+    (27) boolean -> expression GEQ . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 12
+
+state 33
+
+    (33) boolean -> expression OR . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 58
+    factor                         shift and go to state 12
+
+state 34
+
+    (29) boolean -> expression LEQ . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 59
+    factor                         shift and go to state 12
+
+state 35
+
+    (28) boolean -> expression LT . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 60
+    factor                         shift and go to state 12
+
+state 36
+
+    (24) expression -> expression PLUS . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 61
+    factor                         shift and go to state 12
+
+state 37
+
+    (6) statement -> expression TILDE .
+
+    CLOSECURLY      reduce using rule 6 (statement -> expression TILDE .)
+    VAR             reduce using rule 6 (statement -> expression TILDE .)
+    def             reduce using rule 6 (statement -> expression TILDE .)
+    class           reduce using rule 6 (statement -> expression TILDE .)
+    print           reduce using rule 6 (statement -> expression TILDE .)
+    if              reduce using rule 6 (statement -> expression TILDE .)
+    STRLIT          reduce using rule 6 (statement -> expression TILDE .)
+    INTLIT          reduce using rule 6 (statement -> expression TILDE .)
+    OPENPAR         reduce using rule 6 (statement -> expression TILDE .)
+    else            reduce using rule 6 (statement -> expression TILDE .)
+    end_def         reduce using rule 6 (statement -> expression TILDE .)
+
+
+state 38
+
+    (25) expression -> expression MINUS . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 62
+    factor                         shift and go to state 12
+
+state 39
+
+    (31) boolean -> expression NEQ . term
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+    term                           shift and go to state 63
+    factor                         shift and go to state 12
+
+state 40
+
+    (7) statement -> def VAR . OPENPAR parameter CLOSEPAR statement end_def
+
+    OPENPAR         shift and go to state 64
+
+
+state 41
+
+    (40) factor -> OPENPAR expression CLOSEPAR .
+
+    MUL             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    DIV             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    MOD             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    TILDE           reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    PLUS            reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    MINUS           reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    GT              reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    GEQ             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    LT              reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    LEQ             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    EQ              reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    NEQ             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    AND             reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    OR              reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+    CLOSEPAR        reduce using rule 40 (factor -> OPENPAR expression CLOSEPAR .)
+
+
+state 42
+
+    (20) if_statement -> if OPENPAR boolean . CLOSEPAR statement
+    (21) if_statement -> if OPENPAR boolean . CLOSEPAR statement else statement
+    (23) expression -> boolean .
+
+    CLOSEPAR        shift and go to state 65
+    GT              reduce using rule 23 (expression -> boolean .)
+    GEQ             reduce using rule 23 (expression -> boolean .)
+    LT              reduce using rule 23 (expression -> boolean .)
+    LEQ             reduce using rule 23 (expression -> boolean .)
+    EQ              reduce using rule 23 (expression -> boolean .)
+    NEQ             reduce using rule 23 (expression -> boolean .)
+    AND             reduce using rule 23 (expression -> boolean .)
+    OR              reduce using rule 23 (expression -> boolean .)
+    PLUS            reduce using rule 23 (expression -> boolean .)
+    MINUS           reduce using rule 23 (expression -> boolean .)
+
+
+state 43
+
+    (26) boolean -> expression . GT term
+    (27) boolean -> expression . GEQ term
+    (28) boolean -> expression . LT term
+    (29) boolean -> expression . LEQ term
+    (30) boolean -> expression . EQ term
+    (31) boolean -> expression . NEQ term
+    (32) boolean -> expression . AND term
+    (33) boolean -> expression . OR term
+    (24) expression -> expression . PLUS term
+    (25) expression -> expression . MINUS term
+
+    GT              shift and go to state 30
+    GEQ             shift and go to state 32
+    LT              shift and go to state 35
+    LEQ             shift and go to state 34
+    EQ              shift and go to state 31
+    NEQ             shift and go to state 39
+    AND             shift and go to state 29
+    OR              shift and go to state 33
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 38
+
+
+state 44
+
+    (1) main_program -> start OPENCURLY statement CLOSECURLY end .
+
+    $end            reduce using rule 1 (main_program -> start OPENCURLY statement CLOSECURLY end .)
+
+
+state 45
+
+    (4) statement -> statement statement statement .
+    (4) statement -> statement statement . statement
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! reduce/reduce conflict for if resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for STRLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for INTLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for OPENPAR resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for CLOSECURLY resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for else resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for end_def resolved using rule 3 (empty -> .)
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    else            reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! CLOSECURLY      [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! VAR             [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! def             [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! class           [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! print           [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! if              [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! STRLIT          [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! INTLIT          [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! OPENPAR         [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! else            [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! end_def         [ reduce using rule 4 (statement -> statement statement statement .) ]
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 45
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 46
+
+    (16) statement -> print OPENPAR STRLIT . CLOSEPAR TILDE
+    (37) term -> STRLIT .
+
+  ! shift/reduce conflict for CLOSEPAR resolved as shift
+    CLOSEPAR        shift and go to state 66
+    MUL             reduce using rule 37 (term -> STRLIT .)
+    DIV             reduce using rule 37 (term -> STRLIT .)
+    MOD             reduce using rule 37 (term -> STRLIT .)
+    PLUS            reduce using rule 37 (term -> STRLIT .)
+    MINUS           reduce using rule 37 (term -> STRLIT .)
+    GT              reduce using rule 37 (term -> STRLIT .)
+    GEQ             reduce using rule 37 (term -> STRLIT .)
+    LT              reduce using rule 37 (term -> STRLIT .)
+    LEQ             reduce using rule 37 (term -> STRLIT .)
+    EQ              reduce using rule 37 (term -> STRLIT .)
+    NEQ             reduce using rule 37 (term -> STRLIT .)
+    AND             reduce using rule 37 (term -> STRLIT .)
+    OR              reduce using rule 37 (term -> STRLIT .)
+
+  ! CLOSEPAR        [ reduce using rule 37 (term -> STRLIT .) ]
+
+
+state 47
+
+    (15) statement -> print OPENPAR expression . CLOSEPAR TILDE
+    (24) expression -> expression . PLUS term
+    (25) expression -> expression . MINUS term
+    (26) boolean -> expression . GT term
+    (27) boolean -> expression . GEQ term
+    (28) boolean -> expression . LT term
+    (29) boolean -> expression . LEQ term
+    (30) boolean -> expression . EQ term
+    (31) boolean -> expression . NEQ term
+    (32) boolean -> expression . AND term
+    (33) boolean -> expression . OR term
+
+    CLOSEPAR        shift and go to state 67
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 38
+    GT              shift and go to state 30
+    GEQ             shift and go to state 32
+    LT              shift and go to state 35
+    LEQ             shift and go to state 34
+    EQ              shift and go to state 31
+    NEQ             shift and go to state 39
+    AND             shift and go to state 29
+    OR              shift and go to state 33
+
+
+state 48
+
+    (12) statement -> VAR ASSIGN STRLIT . TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> VAR ASSIGN STRLIT . TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> VAR ASSIGN STRLIT . TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (37) term -> STRLIT .
+
+  ! shift/reduce conflict for TILDE resolved as shift
+    TILDE           shift and go to state 68
+    MUL             reduce using rule 37 (term -> STRLIT .)
+    DIV             reduce using rule 37 (term -> STRLIT .)
+    MOD             reduce using rule 37 (term -> STRLIT .)
+    PLUS            reduce using rule 37 (term -> STRLIT .)
+    MINUS           reduce using rule 37 (term -> STRLIT .)
+    GT              reduce using rule 37 (term -> STRLIT .)
+    GEQ             reduce using rule 37 (term -> STRLIT .)
+    LT              reduce using rule 37 (term -> STRLIT .)
+    LEQ             reduce using rule 37 (term -> STRLIT .)
+    EQ              reduce using rule 37 (term -> STRLIT .)
+    NEQ             reduce using rule 37 (term -> STRLIT .)
+    AND             reduce using rule 37 (term -> STRLIT .)
+    OR              reduce using rule 37 (term -> STRLIT .)
+
+  ! TILDE           [ reduce using rule 37 (term -> STRLIT .) ]
+
+
+state 49
+
+    (5) statement -> VAR ASSIGN expression . TILDE
+    (11) statement -> VAR ASSIGN expression . TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> VAR ASSIGN expression . TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (17) statement -> VAR ASSIGN expression . TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (24) expression -> expression . PLUS term
+    (25) expression -> expression . MINUS term
+    (26) boolean -> expression . GT term
+    (27) boolean -> expression . GEQ term
+    (28) boolean -> expression . LT term
+    (29) boolean -> expression . LEQ term
+    (30) boolean -> expression . EQ term
+    (31) boolean -> expression . NEQ term
+    (32) boolean -> expression . AND term
+    (33) boolean -> expression . OR term
+
+    TILDE           shift and go to state 69
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 38
+    GT              shift and go to state 30
+    GEQ             shift and go to state 32
+    LT              shift and go to state 35
+    LEQ             shift and go to state 34
+    EQ              shift and go to state 31
+    NEQ             shift and go to state 39
+    AND             shift and go to state 29
+    OR              shift and go to state 33
+
+
+state 50
+
+    (10) statement -> class VAR OPENCURLY . statement CLOSECURLY
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 70
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 51
+
+    (34) term -> term MUL factor .
+
+    MUL             reduce using rule 34 (term -> term MUL factor .)
+    DIV             reduce using rule 34 (term -> term MUL factor .)
+    MOD             reduce using rule 34 (term -> term MUL factor .)
+    TILDE           reduce using rule 34 (term -> term MUL factor .)
+    PLUS            reduce using rule 34 (term -> term MUL factor .)
+    MINUS           reduce using rule 34 (term -> term MUL factor .)
+    GT              reduce using rule 34 (term -> term MUL factor .)
+    GEQ             reduce using rule 34 (term -> term MUL factor .)
+    LT              reduce using rule 34 (term -> term MUL factor .)
+    LEQ             reduce using rule 34 (term -> term MUL factor .)
+    EQ              reduce using rule 34 (term -> term MUL factor .)
+    NEQ             reduce using rule 34 (term -> term MUL factor .)
+    AND             reduce using rule 34 (term -> term MUL factor .)
+    OR              reduce using rule 34 (term -> term MUL factor .)
+    CLOSEPAR        reduce using rule 34 (term -> term MUL factor .)
+
+
+state 52
+
+    (36) term -> term MOD factor .
+
+    MUL             reduce using rule 36 (term -> term MOD factor .)
+    DIV             reduce using rule 36 (term -> term MOD factor .)
+    MOD             reduce using rule 36 (term -> term MOD factor .)
+    TILDE           reduce using rule 36 (term -> term MOD factor .)
+    PLUS            reduce using rule 36 (term -> term MOD factor .)
+    MINUS           reduce using rule 36 (term -> term MOD factor .)
+    GT              reduce using rule 36 (term -> term MOD factor .)
+    GEQ             reduce using rule 36 (term -> term MOD factor .)
+    LT              reduce using rule 36 (term -> term MOD factor .)
+    LEQ             reduce using rule 36 (term -> term MOD factor .)
+    EQ              reduce using rule 36 (term -> term MOD factor .)
+    NEQ             reduce using rule 36 (term -> term MOD factor .)
+    AND             reduce using rule 36 (term -> term MOD factor .)
+    OR              reduce using rule 36 (term -> term MOD factor .)
+    CLOSEPAR        reduce using rule 36 (term -> term MOD factor .)
+
+
+state 53
+
+    (35) term -> term DIV factor .
+
+    MUL             reduce using rule 35 (term -> term DIV factor .)
+    DIV             reduce using rule 35 (term -> term DIV factor .)
+    MOD             reduce using rule 35 (term -> term DIV factor .)
+    TILDE           reduce using rule 35 (term -> term DIV factor .)
+    PLUS            reduce using rule 35 (term -> term DIV factor .)
+    MINUS           reduce using rule 35 (term -> term DIV factor .)
+    GT              reduce using rule 35 (term -> term DIV factor .)
+    GEQ             reduce using rule 35 (term -> term DIV factor .)
+    LT              reduce using rule 35 (term -> term DIV factor .)
+    LEQ             reduce using rule 35 (term -> term DIV factor .)
+    EQ              reduce using rule 35 (term -> term DIV factor .)
+    NEQ             reduce using rule 35 (term -> term DIV factor .)
+    AND             reduce using rule 35 (term -> term DIV factor .)
+    OR              reduce using rule 35 (term -> term DIV factor .)
+    CLOSEPAR        reduce using rule 35 (term -> term DIV factor .)
+
+
+state 54
+
+    (32) boolean -> expression AND term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 32 (boolean -> expression AND term .)
+    PLUS            reduce using rule 32 (boolean -> expression AND term .)
+    MINUS           reduce using rule 32 (boolean -> expression AND term .)
+    GT              reduce using rule 32 (boolean -> expression AND term .)
+    GEQ             reduce using rule 32 (boolean -> expression AND term .)
+    LT              reduce using rule 32 (boolean -> expression AND term .)
+    LEQ             reduce using rule 32 (boolean -> expression AND term .)
+    EQ              reduce using rule 32 (boolean -> expression AND term .)
+    NEQ             reduce using rule 32 (boolean -> expression AND term .)
+    AND             reduce using rule 32 (boolean -> expression AND term .)
+    OR              reduce using rule 32 (boolean -> expression AND term .)
+    CLOSEPAR        reduce using rule 32 (boolean -> expression AND term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 55
+
+    (26) boolean -> expression GT term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 26 (boolean -> expression GT term .)
+    PLUS            reduce using rule 26 (boolean -> expression GT term .)
+    MINUS           reduce using rule 26 (boolean -> expression GT term .)
+    GT              reduce using rule 26 (boolean -> expression GT term .)
+    GEQ             reduce using rule 26 (boolean -> expression GT term .)
+    LT              reduce using rule 26 (boolean -> expression GT term .)
+    LEQ             reduce using rule 26 (boolean -> expression GT term .)
+    EQ              reduce using rule 26 (boolean -> expression GT term .)
+    NEQ             reduce using rule 26 (boolean -> expression GT term .)
+    AND             reduce using rule 26 (boolean -> expression GT term .)
+    OR              reduce using rule 26 (boolean -> expression GT term .)
+    CLOSEPAR        reduce using rule 26 (boolean -> expression GT term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 56
+
+    (30) boolean -> expression EQ term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 30 (boolean -> expression EQ term .)
+    PLUS            reduce using rule 30 (boolean -> expression EQ term .)
+    MINUS           reduce using rule 30 (boolean -> expression EQ term .)
+    GT              reduce using rule 30 (boolean -> expression EQ term .)
+    GEQ             reduce using rule 30 (boolean -> expression EQ term .)
+    LT              reduce using rule 30 (boolean -> expression EQ term .)
+    LEQ             reduce using rule 30 (boolean -> expression EQ term .)
+    EQ              reduce using rule 30 (boolean -> expression EQ term .)
+    NEQ             reduce using rule 30 (boolean -> expression EQ term .)
+    AND             reduce using rule 30 (boolean -> expression EQ term .)
+    OR              reduce using rule 30 (boolean -> expression EQ term .)
+    CLOSEPAR        reduce using rule 30 (boolean -> expression EQ term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 57
+
+    (27) boolean -> expression GEQ term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 27 (boolean -> expression GEQ term .)
+    PLUS            reduce using rule 27 (boolean -> expression GEQ term .)
+    MINUS           reduce using rule 27 (boolean -> expression GEQ term .)
+    GT              reduce using rule 27 (boolean -> expression GEQ term .)
+    GEQ             reduce using rule 27 (boolean -> expression GEQ term .)
+    LT              reduce using rule 27 (boolean -> expression GEQ term .)
+    LEQ             reduce using rule 27 (boolean -> expression GEQ term .)
+    EQ              reduce using rule 27 (boolean -> expression GEQ term .)
+    NEQ             reduce using rule 27 (boolean -> expression GEQ term .)
+    AND             reduce using rule 27 (boolean -> expression GEQ term .)
+    OR              reduce using rule 27 (boolean -> expression GEQ term .)
+    CLOSEPAR        reduce using rule 27 (boolean -> expression GEQ term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 58
+
+    (33) boolean -> expression OR term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 33 (boolean -> expression OR term .)
+    PLUS            reduce using rule 33 (boolean -> expression OR term .)
+    MINUS           reduce using rule 33 (boolean -> expression OR term .)
+    GT              reduce using rule 33 (boolean -> expression OR term .)
+    GEQ             reduce using rule 33 (boolean -> expression OR term .)
+    LT              reduce using rule 33 (boolean -> expression OR term .)
+    LEQ             reduce using rule 33 (boolean -> expression OR term .)
+    EQ              reduce using rule 33 (boolean -> expression OR term .)
+    NEQ             reduce using rule 33 (boolean -> expression OR term .)
+    AND             reduce using rule 33 (boolean -> expression OR term .)
+    OR              reduce using rule 33 (boolean -> expression OR term .)
+    CLOSEPAR        reduce using rule 33 (boolean -> expression OR term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 59
+
+    (29) boolean -> expression LEQ term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 29 (boolean -> expression LEQ term .)
+    PLUS            reduce using rule 29 (boolean -> expression LEQ term .)
+    MINUS           reduce using rule 29 (boolean -> expression LEQ term .)
+    GT              reduce using rule 29 (boolean -> expression LEQ term .)
+    GEQ             reduce using rule 29 (boolean -> expression LEQ term .)
+    LT              reduce using rule 29 (boolean -> expression LEQ term .)
+    LEQ             reduce using rule 29 (boolean -> expression LEQ term .)
+    EQ              reduce using rule 29 (boolean -> expression LEQ term .)
+    NEQ             reduce using rule 29 (boolean -> expression LEQ term .)
+    AND             reduce using rule 29 (boolean -> expression LEQ term .)
+    OR              reduce using rule 29 (boolean -> expression LEQ term .)
+    CLOSEPAR        reduce using rule 29 (boolean -> expression LEQ term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 60
+
+    (28) boolean -> expression LT term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 28 (boolean -> expression LT term .)
+    PLUS            reduce using rule 28 (boolean -> expression LT term .)
+    MINUS           reduce using rule 28 (boolean -> expression LT term .)
+    GT              reduce using rule 28 (boolean -> expression LT term .)
+    GEQ             reduce using rule 28 (boolean -> expression LT term .)
+    LT              reduce using rule 28 (boolean -> expression LT term .)
+    LEQ             reduce using rule 28 (boolean -> expression LT term .)
+    EQ              reduce using rule 28 (boolean -> expression LT term .)
+    NEQ             reduce using rule 28 (boolean -> expression LT term .)
+    AND             reduce using rule 28 (boolean -> expression LT term .)
+    OR              reduce using rule 28 (boolean -> expression LT term .)
+    CLOSEPAR        reduce using rule 28 (boolean -> expression LT term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 61
+
+    (24) expression -> expression PLUS term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 24 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 24 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 24 (expression -> expression PLUS term .)
+    GT              reduce using rule 24 (expression -> expression PLUS term .)
+    GEQ             reduce using rule 24 (expression -> expression PLUS term .)
+    LT              reduce using rule 24 (expression -> expression PLUS term .)
+    LEQ             reduce using rule 24 (expression -> expression PLUS term .)
+    EQ              reduce using rule 24 (expression -> expression PLUS term .)
+    NEQ             reduce using rule 24 (expression -> expression PLUS term .)
+    AND             reduce using rule 24 (expression -> expression PLUS term .)
+    OR              reduce using rule 24 (expression -> expression PLUS term .)
+    CLOSEPAR        reduce using rule 24 (expression -> expression PLUS term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 62
+
+    (25) expression -> expression MINUS term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 25 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 25 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 25 (expression -> expression MINUS term .)
+    GT              reduce using rule 25 (expression -> expression MINUS term .)
+    GEQ             reduce using rule 25 (expression -> expression MINUS term .)
+    LT              reduce using rule 25 (expression -> expression MINUS term .)
+    LEQ             reduce using rule 25 (expression -> expression MINUS term .)
+    EQ              reduce using rule 25 (expression -> expression MINUS term .)
+    NEQ             reduce using rule 25 (expression -> expression MINUS term .)
+    AND             reduce using rule 25 (expression -> expression MINUS term .)
+    OR              reduce using rule 25 (expression -> expression MINUS term .)
+    CLOSEPAR        reduce using rule 25 (expression -> expression MINUS term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 63
+
+    (31) boolean -> expression NEQ term .
+    (34) term -> term . MUL factor
+    (35) term -> term . DIV factor
+    (36) term -> term . MOD factor
+
+    TILDE           reduce using rule 31 (boolean -> expression NEQ term .)
+    PLUS            reduce using rule 31 (boolean -> expression NEQ term .)
+    MINUS           reduce using rule 31 (boolean -> expression NEQ term .)
+    GT              reduce using rule 31 (boolean -> expression NEQ term .)
+    GEQ             reduce using rule 31 (boolean -> expression NEQ term .)
+    LT              reduce using rule 31 (boolean -> expression NEQ term .)
+    LEQ             reduce using rule 31 (boolean -> expression NEQ term .)
+    EQ              reduce using rule 31 (boolean -> expression NEQ term .)
+    NEQ             reduce using rule 31 (boolean -> expression NEQ term .)
+    AND             reduce using rule 31 (boolean -> expression NEQ term .)
+    OR              reduce using rule 31 (boolean -> expression NEQ term .)
+    CLOSEPAR        reduce using rule 31 (boolean -> expression NEQ term .)
+    MUL             shift and go to state 26
+    DIV             shift and go to state 28
+    MOD             shift and go to state 27
+
+
+state 64
+
+    (7) statement -> def VAR OPENPAR . parameter CLOSEPAR statement end_def
+    (8) parameter -> . int VAR
+    (9) parameter -> . string VAR
+
+    int             shift and go to state 72
+    string          shift and go to state 71
+
+    parameter                      shift and go to state 73
+
+state 65
+
+    (20) if_statement -> if OPENPAR boolean CLOSEPAR . statement
+    (21) if_statement -> if OPENPAR boolean CLOSEPAR . statement else statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    else            reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 74
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 66
+
+    (16) statement -> print OPENPAR STRLIT CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 75
+
+
+state 67
+
+    (15) statement -> print OPENPAR expression CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 76
+
+
+state 68
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE . scan OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> VAR ASSIGN STRLIT TILDE . return OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> VAR ASSIGN STRLIT TILDE . print OPENPAR VAR CLOSEPAR TILDE
+
+    scan            shift and go to state 78
+    return          shift and go to state 77
+    print           shift and go to state 79
+
+
+state 69
+
+    (5) statement -> VAR ASSIGN expression TILDE .
+    (11) statement -> VAR ASSIGN expression TILDE . scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> VAR ASSIGN expression TILDE . return OPENPAR VAR CLOSEPAR TILDE
+    (17) statement -> VAR ASSIGN expression TILDE . print OPENPAR VAR CLOSEPAR TILDE
+
+  ! shift/reduce conflict for print resolved as shift
+    CLOSECURLY      reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    VAR             reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    def             reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    class           reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    if              reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    STRLIT          reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    INTLIT          reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    OPENPAR         reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    else            reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    end_def         reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .)
+    scan            shift and go to state 81
+    return          shift and go to state 80
+    print           shift and go to state 82
+
+  ! print           [ reduce using rule 5 (statement -> VAR ASSIGN expression TILDE .) ]
+
+
+state 70
+
+    (10) statement -> class VAR OPENCURLY statement . CLOSECURLY
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for CLOSECURLY resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    CLOSECURLY      shift and go to state 83
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+  ! CLOSECURLY      [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 22
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 71
+
+    (9) parameter -> string . VAR
+
+    VAR             shift and go to state 84
+
+
+state 72
+
+    (8) parameter -> int . VAR
+
+    VAR             shift and go to state 85
+
+
+state 73
+
+    (7) statement -> def VAR OPENPAR parameter . CLOSEPAR statement end_def
+
+    CLOSEPAR        shift and go to state 86
+
+
+state 74
+
+    (20) if_statement -> if OPENPAR boolean CLOSEPAR statement .
+    (21) if_statement -> if OPENPAR boolean CLOSEPAR statement . else statement
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for else resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! reduce/reduce conflict for if resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for STRLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for INTLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for OPENPAR resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for CLOSECURLY resolved using rule 3 (empty -> .)
+  ! shift/reduce conflict for else resolved as shift
+  ! reduce/reduce conflict for end_def resolved using rule 3 (empty -> .)
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    else            shift and go to state 87
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! end_def         [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! VAR             [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! def             [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! class           [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! print           [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! if              [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! STRLIT          [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! INTLIT          [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! OPENPAR         [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! CLOSECURLY      [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! else            [ reduce using rule 20 (if_statement -> if OPENPAR boolean CLOSEPAR statement .) ]
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+  ! else            [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 22
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 75
+
+    (16) statement -> print OPENPAR STRLIT CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    VAR             reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    def             reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    class           reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    print           reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    if              reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    else            reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+    end_def         reduce using rule 16 (statement -> print OPENPAR STRLIT CLOSEPAR TILDE .)
+
+
+state 76
+
+    (15) statement -> print OPENPAR expression CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    VAR             reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    def             reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    class           reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    print           reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    if              reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    else            reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+    end_def         reduce using rule 15 (statement -> print OPENPAR expression CLOSEPAR TILDE .)
+
+
+state 77
+
+    (14) statement -> VAR ASSIGN STRLIT TILDE return . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 88
+
+
+state 78
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE scan . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 89
+
+
+state 79
+
+    (18) statement -> VAR ASSIGN STRLIT TILDE print . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 90
+
+
+state 80
+
+    (13) statement -> VAR ASSIGN expression TILDE return . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 91
+
+
+state 81
+
+    (11) statement -> VAR ASSIGN expression TILDE scan . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 92
+
+
+state 82
+
+    (17) statement -> VAR ASSIGN expression TILDE print . OPENPAR VAR CLOSEPAR TILDE
+
+    OPENPAR         shift and go to state 93
+
+
+state 83
+
+    (10) statement -> class VAR OPENCURLY statement CLOSECURLY .
+
+    CLOSECURLY      reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    VAR             reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    def             reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    class           reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    print           reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    if              reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    STRLIT          reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    INTLIT          reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    OPENPAR         reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    else            reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+    end_def         reduce using rule 10 (statement -> class VAR OPENCURLY statement CLOSECURLY .)
+
+
+state 84
+
+    (9) parameter -> string VAR .
+
+    CLOSEPAR        reduce using rule 9 (parameter -> string VAR .)
+
+
+state 85
+
+    (8) parameter -> int VAR .
+
+    CLOSEPAR        reduce using rule 8 (parameter -> int VAR .)
+
+
+state 86
+
+    (7) statement -> def VAR OPENPAR parameter CLOSEPAR . statement end_def
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 94
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    expression                     shift and go to state 17
+    empty                          shift and go to state 11
+
+state 87
+
+    (21) if_statement -> if OPENPAR boolean CLOSEPAR statement else . statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    else            reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 95
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 88
+
+    (14) statement -> VAR ASSIGN STRLIT TILDE return OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 96
+
+
+state 89
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 97
+
+
+state 90
+
+    (18) statement -> VAR ASSIGN STRLIT TILDE print OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 98
+
+
+state 91
+
+    (13) statement -> VAR ASSIGN expression TILDE return OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 99
+
+
+state 92
+
+    (11) statement -> VAR ASSIGN expression TILDE scan OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 100
+
+
+state 93
+
+    (17) statement -> VAR ASSIGN expression TILDE print OPENPAR . VAR CLOSEPAR TILDE
+
+    VAR             shift and go to state 101
+
+
+state 94
+
+    (7) statement -> def VAR OPENPAR parameter CLOSEPAR statement . end_def
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for end_def resolved as shift
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    end_def         shift and go to state 102
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+  ! end_def         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 22
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    expression                     shift and go to state 17
+    empty                          shift and go to state 11
+
+state 95
+
+    (21) if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .
+    (4) statement -> statement . statement statement
+    (2) statement -> . empty
+    (4) statement -> . statement statement statement
+    (5) statement -> . VAR ASSIGN expression TILDE
+    (6) statement -> . expression TILDE
+    (7) statement -> . def VAR OPENPAR parameter CLOSEPAR statement end_def
+    (10) statement -> . class VAR OPENCURLY statement CLOSECURLY
+    (11) statement -> . VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (12) statement -> . VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE
+    (13) statement -> . VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (14) statement -> . VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE
+    (15) statement -> . print OPENPAR expression CLOSEPAR TILDE
+    (16) statement -> . print OPENPAR STRLIT CLOSEPAR TILDE
+    (17) statement -> . VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (18) statement -> . VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE
+    (19) statement -> . if_statement
+    (3) empty -> .
+    (22) expression -> . term
+    (23) expression -> . boolean
+    (24) expression -> . expression PLUS term
+    (25) expression -> . expression MINUS term
+    (20) if_statement -> . if OPENPAR boolean CLOSEPAR statement
+    (21) if_statement -> . if OPENPAR boolean CLOSEPAR statement else statement
+    (34) term -> . term MUL factor
+    (35) term -> . term DIV factor
+    (36) term -> . term MOD factor
+    (37) term -> . STRLIT
+    (38) term -> . factor
+    (26) boolean -> . expression GT term
+    (27) boolean -> . expression GEQ term
+    (28) boolean -> . expression LT term
+    (29) boolean -> . expression LEQ term
+    (30) boolean -> . expression EQ term
+    (31) boolean -> . expression NEQ term
+    (32) boolean -> . expression AND term
+    (33) boolean -> . expression OR term
+    (39) factor -> . INTLIT
+    (40) factor -> . OPENPAR expression CLOSEPAR
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for def resolved as shift
+  ! shift/reduce conflict for class resolved as shift
+  ! shift/reduce conflict for print resolved as shift
+  ! reduce/reduce conflict for if resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for STRLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for INTLIT resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for OPENPAR resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for CLOSECURLY resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for else resolved using rule 3 (empty -> .)
+  ! reduce/reduce conflict for end_def resolved using rule 3 (empty -> .)
+  ! shift/reduce conflict for if resolved as shift
+  ! shift/reduce conflict for STRLIT resolved as shift
+  ! shift/reduce conflict for INTLIT resolved as shift
+  ! shift/reduce conflict for OPENPAR resolved as shift
+    VAR             shift and go to state 14
+    def             shift and go to state 18
+    class           shift and go to state 15
+    print           shift and go to state 9
+    CLOSECURLY      reduce using rule 3 (empty -> .)
+    else            reduce using rule 3 (empty -> .)
+    end_def         reduce using rule 3 (empty -> .)
+    if              shift and go to state 7
+    STRLIT          shift and go to state 13
+    INTLIT          shift and go to state 6
+    OPENPAR         shift and go to state 4
+
+  ! end_def         [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! VAR             [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! def             [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! class           [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! print           [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! if              [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! STRLIT          [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! INTLIT          [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! OPENPAR         [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! CLOSECURLY      [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! else            [ reduce using rule 21 (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement .) ]
+  ! VAR             [ reduce using rule 3 (empty -> .) ]
+  ! def             [ reduce using rule 3 (empty -> .) ]
+  ! class           [ reduce using rule 3 (empty -> .) ]
+  ! print           [ reduce using rule 3 (empty -> .) ]
+  ! if              [ reduce using rule 3 (empty -> .) ]
+  ! STRLIT          [ reduce using rule 3 (empty -> .) ]
+  ! INTLIT          [ reduce using rule 3 (empty -> .) ]
+  ! OPENPAR         [ reduce using rule 3 (empty -> .) ]
+
+    term                           shift and go to state 16
+    expression                     shift and go to state 17
+    boolean                        shift and go to state 5
+    statement                      shift and go to state 22
+    factor                         shift and go to state 12
+    if_statement                   shift and go to state 10
+    empty                          shift and go to state 11
+
+state 96
+
+    (14) statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 103
+
+
+state 97
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 104
+
+
+state 98
+
+    (18) statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 105
+
+
+state 99
+
+    (13) statement -> VAR ASSIGN expression TILDE return OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 106
+
+
+state 100
+
+    (11) statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 107
+
+
+state 101
+
+    (17) statement -> VAR ASSIGN expression TILDE print OPENPAR VAR . CLOSEPAR TILDE
+
+    CLOSEPAR        shift and go to state 108
+
+
+state 102
+
+    (7) statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .
+
+    CLOSECURLY      reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    VAR             reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    def             reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    class           reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    print           reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    if              reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    STRLIT          reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    INTLIT          reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    OPENPAR         reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    else            reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+    end_def         reduce using rule 7 (statement -> def VAR OPENPAR parameter CLOSEPAR statement end_def .)
+
+
+state 103
+
+    (14) statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 109
+
+
+state 104
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 110
+
+
+state 105
+
+    (18) statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 111
+
+
+state 106
+
+    (13) statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 112
+
+
+state 107
+
+    (11) statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 113
+
+
+state 108
+
+    (17) statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR . TILDE
+
+    TILDE           shift and go to state 114
+
+
+state 109
+
+    (14) statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 14 (statement -> VAR ASSIGN STRLIT TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+
+
+state 110
+
+    (12) statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 12 (statement -> VAR ASSIGN STRLIT TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+
+
+state 111
+
+    (18) statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 18 (statement -> VAR ASSIGN STRLIT TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+
+
+state 112
+
+    (13) statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 13 (statement -> VAR ASSIGN expression TILDE return OPENPAR VAR CLOSEPAR TILDE .)
+
+
+state 113
+
+    (11) statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 11 (statement -> VAR ASSIGN expression TILDE scan OPENPAR VAR CLOSEPAR TILDE .)
+
+
+state 114
+
+    (17) statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .
+
+    CLOSECURLY      reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    VAR             reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    def             reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    class           reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    print           reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    if              reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    STRLIT          reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    INTLIT          reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    OPENPAR         reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    else            reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+    end_def         reduce using rule 17 (statement -> VAR ASSIGN expression TILDE print OPENPAR VAR CLOSEPAR TILDE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for VAR in state 3 resolved as shift
+WARNING: shift/reduce conflict for def in state 3 resolved as shift
+WARNING: shift/reduce conflict for class in state 3 resolved as shift
+WARNING: shift/reduce conflict for print in state 3 resolved as shift
+WARNING: shift/reduce conflict for if in state 3 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 3 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 3 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 3 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 8 resolved as shift
+WARNING: shift/reduce conflict for def in state 8 resolved as shift
+WARNING: shift/reduce conflict for class in state 8 resolved as shift
+WARNING: shift/reduce conflict for print in state 8 resolved as shift
+WARNING: shift/reduce conflict for CLOSECURLY in state 8 resolved as shift
+WARNING: shift/reduce conflict for if in state 8 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 8 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 8 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 8 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 22 resolved as shift
+WARNING: shift/reduce conflict for def in state 22 resolved as shift
+WARNING: shift/reduce conflict for class in state 22 resolved as shift
+WARNING: shift/reduce conflict for print in state 22 resolved as shift
+WARNING: shift/reduce conflict for if in state 22 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 22 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 22 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 22 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 45 resolved as shift
+WARNING: shift/reduce conflict for def in state 45 resolved as shift
+WARNING: shift/reduce conflict for class in state 45 resolved as shift
+WARNING: shift/reduce conflict for print in state 45 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 45 resolved as shift
+WARNING: shift/reduce conflict for def in state 45 resolved as shift
+WARNING: shift/reduce conflict for class in state 45 resolved as shift
+WARNING: shift/reduce conflict for print in state 45 resolved as shift
+WARNING: shift/reduce conflict for if in state 45 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 45 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 45 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 45 resolved as shift
+WARNING: shift/reduce conflict for CLOSEPAR in state 46 resolved as shift
+WARNING: shift/reduce conflict for TILDE in state 48 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 50 resolved as shift
+WARNING: shift/reduce conflict for def in state 50 resolved as shift
+WARNING: shift/reduce conflict for class in state 50 resolved as shift
+WARNING: shift/reduce conflict for print in state 50 resolved as shift
+WARNING: shift/reduce conflict for if in state 50 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 50 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 50 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 50 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 65 resolved as shift
+WARNING: shift/reduce conflict for def in state 65 resolved as shift
+WARNING: shift/reduce conflict for class in state 65 resolved as shift
+WARNING: shift/reduce conflict for print in state 65 resolved as shift
+WARNING: shift/reduce conflict for if in state 65 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 65 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 65 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 65 resolved as shift
+WARNING: shift/reduce conflict for print in state 69 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 70 resolved as shift
+WARNING: shift/reduce conflict for def in state 70 resolved as shift
+WARNING: shift/reduce conflict for class in state 70 resolved as shift
+WARNING: shift/reduce conflict for print in state 70 resolved as shift
+WARNING: shift/reduce conflict for CLOSECURLY in state 70 resolved as shift
+WARNING: shift/reduce conflict for if in state 70 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 70 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 70 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 70 resolved as shift
+WARNING: shift/reduce conflict for else in state 74 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 74 resolved as shift
+WARNING: shift/reduce conflict for def in state 74 resolved as shift
+WARNING: shift/reduce conflict for class in state 74 resolved as shift
+WARNING: shift/reduce conflict for print in state 74 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 74 resolved as shift
+WARNING: shift/reduce conflict for def in state 74 resolved as shift
+WARNING: shift/reduce conflict for class in state 74 resolved as shift
+WARNING: shift/reduce conflict for print in state 74 resolved as shift
+WARNING: shift/reduce conflict for else in state 74 resolved as shift
+WARNING: shift/reduce conflict for if in state 74 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 74 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 74 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 74 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 86 resolved as shift
+WARNING: shift/reduce conflict for def in state 86 resolved as shift
+WARNING: shift/reduce conflict for class in state 86 resolved as shift
+WARNING: shift/reduce conflict for print in state 86 resolved as shift
+WARNING: shift/reduce conflict for if in state 86 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 86 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 86 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 86 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 87 resolved as shift
+WARNING: shift/reduce conflict for def in state 87 resolved as shift
+WARNING: shift/reduce conflict for class in state 87 resolved as shift
+WARNING: shift/reduce conflict for print in state 87 resolved as shift
+WARNING: shift/reduce conflict for if in state 87 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 87 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 87 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 87 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 94 resolved as shift
+WARNING: shift/reduce conflict for def in state 94 resolved as shift
+WARNING: shift/reduce conflict for class in state 94 resolved as shift
+WARNING: shift/reduce conflict for print in state 94 resolved as shift
+WARNING: shift/reduce conflict for end_def in state 94 resolved as shift
+WARNING: shift/reduce conflict for if in state 94 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 94 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 94 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 94 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 95 resolved as shift
+WARNING: shift/reduce conflict for def in state 95 resolved as shift
+WARNING: shift/reduce conflict for class in state 95 resolved as shift
+WARNING: shift/reduce conflict for print in state 95 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 95 resolved as shift
+WARNING: shift/reduce conflict for def in state 95 resolved as shift
+WARNING: shift/reduce conflict for class in state 95 resolved as shift
+WARNING: shift/reduce conflict for print in state 95 resolved as shift
+WARNING: shift/reduce conflict for if in state 95 resolved as shift
+WARNING: shift/reduce conflict for STRLIT in state 95 resolved as shift
+WARNING: shift/reduce conflict for INTLIT in state 95 resolved as shift
+WARNING: shift/reduce conflict for OPENPAR in state 95 resolved as shift
+WARNING: reduce/reduce conflict in state 45 resolved using rule (empty -> <empty>)
+WARNING: rejected rule (statement -> statement statement statement) in state 45
+WARNING: reduce/reduce conflict in state 74 resolved using rule (empty -> <empty>)
+WARNING: rejected rule (if_statement -> if OPENPAR boolean CLOSEPAR statement) in state 74
+WARNING: reduce/reduce conflict in state 95 resolved using rule (empty -> <empty>)
+WARNING: rejected rule (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement) in state 95
+WARNING: Rule (statement -> statement statement statement) is never reduced
+WARNING: Rule (if_statement -> if OPENPAR boolean CLOSEPAR statement) is never reduced
+WARNING: Rule (if_statement -> if OPENPAR boolean CLOSEPAR statement else statement) is never reduced
