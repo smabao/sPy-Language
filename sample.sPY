@@ -1,4 +1,5 @@
 comienzo{
+<<<<<<< HEAD
 a = 5*(3+1)~
 imprimir(a)~
 imprimir("Hello World")~
@@ -6,4 +7,19 @@ imprimir("Hello World")~
 imprimir("YES")~
 otro
 imprimir("NO")~*~
+=======
+clase bb{
+
+a = 5*(3+1)~
+imprimir(a)~
+imprimir("Hello World")~
+
+si(1<2){
+imprimir("YES")~
+}
+otro{
+imprimir("NO")~
+}
+}
+>>>>>>> 7638812c508fe48934589654caece79c9e47acd6
 }fin
