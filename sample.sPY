@@ -1,9 +1,15 @@
 comienzo{
-a = 5*(3+1)~
+clase bb{
+
+a = 5~
 imprimir(a)~
 imprimir("Hello World")~
-~*si(1<2)
+
+si(1<2){
 imprimir("YES")~
-otro
-imprimir("NO")~*~
+}
+otro{
+imprimir("NO")~
+}
+}
 }fin
